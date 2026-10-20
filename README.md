@@ -11,7 +11,7 @@ from logs instead of taking the launchpad's figure.
 
 **Status: draft, not submitted.** The text is in [`ERCS/erc-8453.md`](ERCS/erc-8453.md). ERC-8453 is the next number
 that was free on 2026-10-20; the ERC editors confirm it, or assign another, when the pull request is opened on
-ethereum/ERCs. Discussion opens on Ethereum Magicians first.
+ethereum/ERCs. Discussion: [Ethereum Magicians](https://ethereum-magicians.org/t/erc-8453-creator-fee-rights/30027).
 
 ## Why
 
