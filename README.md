@@ -1,4 +1,4 @@
-# ERC-8453: Creator Fee Rights (draft)
+# Creator Fee Rights (draft ERC)
 
 One interface for the creator fee stream of a launched token: who receives it, what it has earned since launch, what
 can be claimed now, and a claim anyone can call that always pays the recipient. Only the current recipient can name a
@@ -9,9 +9,10 @@ while it owes.
 Every credit to a stream is logged in the transaction where the fee accrues, so a lender can recount `accruedTotal`
 from logs instead of taking the launchpad's figure.
 
-**Status: draft, not submitted.** The text is in [`ERCS/erc-8453.md`](ERCS/erc-8453.md). ERC-8453 is the next number
-that was free on 2026-10-20; the ERC editors confirm it, or assign another, when the pull request is opened on
-ethereum/ERCs. Discussion: [Ethereum Magicians](https://ethereum-magicians.org/t/erc-8453-creator-fee-rights/30027).
+**Status: draft, not submitted.** The text is in
+[`ERCS/erc-draft_creator_fee_rights.md`](ERCS/erc-draft_creator_fee_rights.md). Its `eip: 99904` is a placeholder: the
+ERC editors assign the real number when the pull request is opened on ethereum/ERCs. Discussion: [Ethereum
+Magicians](https://ethereum-magicians.org/t/erc-tba-creator-fee-rights/30027).
 
 ## Why
 
@@ -26,7 +27,7 @@ fixes the reads, the claim and the one rule that makes the pledge hold.
 
 | Path | What |
 |---|---|
-| `ERCS/erc-8453.md` | The ERC text, in the ethereum/ERCs template |
+| `ERCS/erc-draft_creator_fee_rights.md` | The ERC text, in the ethereum/ERCs template |
 | `src/ICreatorFeeRights.sol` | The interface |
 | `src/CreatorFeeEscrow.sol` | A reference fee escrow a launchpad pays creator fees into (not audited) |
 | `test/CreatorFeeEscrow.t.sol` | Foundry tests, including totals recounted from logs and a stream pledged to a payee |
@@ -46,11 +47,11 @@ CI runs all three on every push (`.github/workflows/ci.yml`).
 
 ## Related drafts
 
-- ERC-8451 Agent Repay-First Payees: a revenue address that pays an agent's creditors before its owner
-  (github.com/priors-agents/ERC-8451). A creator points its fee recipient at a payee so that its fees repay its lenders
-  first; only the payee can then hand the stream back.
-- ERC-8455 Launch Declarations: what a launchpad declares at launch, its fee recipient included
-  (github.com/priors-agents/ERC-8455).
+- Agent Repay-First Payees: a revenue address that pays an agent's creditors before its owner
+  (github.com/priors-agents/erc-repay-first-payees). A creator points its fee recipient at a payee so that its fees
+  repay its lenders first; only the payee can then hand the stream back.
+- Launch Declarations: what a launchpad declares at launch, its fee recipient included
+  (github.com/priors-agents/erc-launch-declarations).
 
 ## Licence
 

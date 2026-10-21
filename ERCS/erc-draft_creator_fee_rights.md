@@ -1,9 +1,9 @@
 ---
-eip: 8453
+eip: 99904
 title: Creator Fee Rights
 description: A launched token's creator fee stream, with its history, a public claim and a recipient only the recipient can change
 author: Priors contributors (@priors-agents)
-discussions-to: https://ethereum-magicians.org/t/erc-8453-creator-fee-rights/30027
+discussions-to: https://ethereum-magicians.org/t/erc-tba-creator-fee-rights/30027
 status: Draft
 type: Standards Track
 category: ERC
