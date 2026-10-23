@@ -9,9 +9,9 @@ while it owes.
 Every credit to a stream is logged in the transaction where the fee accrues, so a lender can recount `accruedTotal`
 from logs instead of taking the launchpad's figure.
 
-**Status: draft, not submitted.** The text is in
-[`ERCS/erc-draft_creator_fee_rights.md`](ERCS/erc-draft_creator_fee_rights.md). Its `eip: 99904` is a placeholder: the
-ERC editors assign the real number when the pull request is opened on ethereum/ERCs. Discussion: [Ethereum
+**Status: draft, submitted as [ethereum/ERCs#2103](https://github.com/ethereum/ERCs/pull/2103).** The text is in
+[`ERCS/erc-draft_creator_fee_rights.md`](ERCS/erc-draft_creator_fee_rights.md). Its `eip: 99904` is a placeholder until
+the ERC editors assign a number. Discussion: [Ethereum
 Magicians](https://ethereum-magicians.org/t/erc-tba-creator-fee-rights/30027).
 
 ## Why
