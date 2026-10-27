@@ -1,4 +1,4 @@
-# Creator Fee Rights (draft ERC)
+# ERC-8459: Creator Fee Rights (draft)
 
 One interface for the creator fee stream of a launched token: who receives it, what it has earned since launch, what
 can be claimed now, and a claim anyone can call that always pays the recipient. Only the current recipient can name a
@@ -10,9 +10,8 @@ Every credit to a stream is logged in the transaction where the fee accrues, so 
 from logs instead of taking the launchpad's figure.
 
 **Status: draft, submitted as [ethereum/ERCs#2103](https://github.com/ethereum/ERCs/pull/2103).** The text is in
-[`ERCS/erc-draft_creator_fee_rights.md`](ERCS/erc-draft_creator_fee_rights.md). Its `eip: 99904` is a placeholder until
-the ERC editors assign a number. Discussion: [Ethereum
-Magicians](https://ethereum-magicians.org/t/erc-tba-creator-fee-rights/30027).
+[`ERCS/erc-8459.md`](ERCS/erc-8459.md). The editors assigned it ERC-8459 on 2026-10-27. Discussion: [Ethereum
+Magicians](https://ethereum-magicians.org/t/erc-8459-creator-fee-rights/30027).
 
 ## Why
 
@@ -27,7 +26,7 @@ fixes the reads, the claim and the one rule that makes the pledge hold.
 
 | Path | What |
 |---|---|
-| `ERCS/erc-draft_creator_fee_rights.md` | The ERC text, in the ethereum/ERCs template |
+| `ERCS/erc-8459.md` | The ERC text, in the ethereum/ERCs template |
 | `src/ICreatorFeeRights.sol` | The interface |
 | `src/CreatorFeeEscrow.sol` | A reference fee escrow a launchpad pays creator fees into (not audited) |
 | `test/CreatorFeeEscrow.t.sol` | Foundry tests, including totals recounted from logs and a stream pledged to a payee |
