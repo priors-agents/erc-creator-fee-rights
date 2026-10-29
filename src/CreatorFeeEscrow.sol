@@ -141,6 +141,15 @@ contract CreatorFeeEscrow is ICreatorFeeRights, IERC165 {
         if (toProtocol != 0) _call(asset, abi.encodeCall(IERC20Minimal.transfer, (protocolRecipient, toProtocol)));
     }
 
+    /// @notice Called by a launchpad that can change the fee rate of `token`: at launch with the rate the token
+    ///         launches with, and with each new rate in the transaction that sets it. `rate` is in millionths of the
+    ///         amount traded. The escrow does not set or check the rate, and it leaves the creator share as it is.
+    function reportFeeRate(address token, uint256 rate) external {
+        if (msg.sender != _launchpad) revert NotLaunchpad();
+        if (_streams[token].recipient == address(0)) revert NotRegistered();
+        emit FeeRateChanged(token, rate);
+    }
+
     // ---------------------------------------------------------------- the stream
 
     /// @dev Books and reports the amount sent. An asset that charges on transfer delivers less to the recipient.

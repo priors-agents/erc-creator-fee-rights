@@ -72,6 +72,19 @@ contract MockLaunchpad {
         emit Launched(token, creator);
     }
 
+    /// @notice A launch whose fee rate this launchpad can change later: the escrow logs the rate it launches with.
+    function launchWithFeeRate(address creator, uint256 rate) external returns (address token) {
+        token = address(new MockToken());
+        escrow.register(token, creator);
+        escrow.reportFeeRate(token, rate);
+        emit Launched(token, creator);
+    }
+
+    /// @notice Changes the fee rate of a token launched with one; the escrow logs the new rate in this call.
+    function setFeeRate(address token, uint256 rate) external {
+        escrow.reportFeeRate(token, rate);
+    }
+
     /// @notice A trade of `token` that costs the trader `fee` of `asset`, all of it paid into the escrow at once.
     function trade(address token, address asset, uint256 fee) external {
         require(MockToken(asset).transferFrom(msg.sender, address(this), fee), "pay");

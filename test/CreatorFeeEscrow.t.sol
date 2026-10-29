@@ -18,6 +18,7 @@ contract CreatorFeeEscrowTest is Test {
     event CreatorFeesAccrued(address indexed token, address indexed asset, uint256 amount);
     event CreatorFeesClaimed(address indexed token, address indexed recipient, address indexed asset, uint256 amount);
     event FeeRecipientChanged(address indexed token, address indexed from, address indexed to);
+    event FeeRateChanged(address indexed token, uint256 rate);
     event Traded(address indexed token, address indexed trader, address indexed asset, uint256 fee);
 
     uint16 constant SHARE = 5_000; // the creator's half of each fee
@@ -204,6 +205,36 @@ contract CreatorFeeEscrowTest is Test {
         assertEq(escrow.accruedTotal(token, address(usd)), 50e6);
         assertEq(escrow.creatorShareBps(later), 1_000);
         assertEq(escrow.accruedTotal(later, address(usd)), 10e6);
+    }
+
+    function test_feeRate_isLoggedAtLaunchAndAtEachChange_apartFromTheShare() public {
+        address next = vm.computeCreateAddress(address(launchpad), vm.getNonce(address(launchpad)));
+        vm.expectEmit(true, true, true, true, address(escrow));
+        emit FeeRecipientChanged(next, address(0), creator);
+        vm.expectEmit(true, false, false, true, address(escrow));
+        emit FeeRateChanged(next, 10_000); // 1%, in millionths of the amount traded
+        address t = launchpad.launchWithFeeRate(creator, 10_000);
+        assertEq(t, next);
+
+        vm.expectEmit(true, false, false, true, address(escrow));
+        emit FeeRateChanged(t, 5_000); // lowered to 0.5%, logged in the call that lowers it
+        launchpad.setFeeRate(t, 5_000);
+
+        _trade(t, usd, 100e6);
+        assertEq(escrow.creatorShareBps(t), SHARE); // the share does not move with the rate
+        assertEq(escrow.accruedTotal(t, address(usd)), 50e6);
+    }
+
+    function test_reportFeeRate_onlyTheLaunchpad_andARegisteredToken() public {
+        vm.prank(admin);
+        vm.expectRevert(CreatorFeeEscrow.NotLaunchpad.selector);
+        escrow.reportFeeRate(token, 0);
+        vm.prank(creator);
+        vm.expectRevert(CreatorFeeEscrow.NotLaunchpad.selector);
+        escrow.reportFeeRate(token, 0);
+        vm.prank(address(launchpad));
+        vm.expectRevert(CreatorFeeEscrow.NotRegistered.selector);
+        escrow.reportFeeRate(address(0xbeef), 10_000);
     }
 
     function test_adminSettings_onlyTheAdmin() public {
